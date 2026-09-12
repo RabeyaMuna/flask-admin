@@ -172,6 +172,7 @@ def test_admin_customizations(app, babel):
     client = app.test_client()
     rv = client.get("/foobar/")
     assert rv.status_code == 200
+    rv.close()
 
     # test custom static_url_path
     with app.test_request_context("/"):
@@ -181,6 +182,7 @@ def test_admin_customizations(app, babel):
             )
         )
     assert rv.status_code == 200
+    rv.close()
 
 
 def test_baseview_registration():
