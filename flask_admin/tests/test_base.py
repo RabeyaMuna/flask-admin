@@ -181,6 +181,7 @@ def test_admin_customizations(app, babel):
             )
         )
     assert rv.status_code == 200
+    rv.close()
 
 
 def test_baseview_registration():
