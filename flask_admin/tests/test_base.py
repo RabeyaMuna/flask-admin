@@ -421,7 +421,7 @@ def test_root_mount(app, babel):
                 "admin.static", filename="bootstrap/bootstrap4/css/bootstrap.min.css"
             )
         )
-        rv.close()
+        rv.get_data()
     assert rv.status_code == 200
 
 
