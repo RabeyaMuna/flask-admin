@@ -24,6 +24,8 @@ def app():
     app.config["WTF_CSRF_ENABLED"] = False
     app.jinja_env.undefined = StrictUndefined
     yield app
+    # Ensure all file handles are closed after the test
+    app.teardown_appcontext_funcs = []
 
 
 class MockView(base.BaseView):
@@ -180,6 +182,7 @@ def test_admin_customizations(app, babel):
                 "admin.static", filename="bootstrap/bootstrap4/css/bootstrap.min.css"
             )
         )
+        rv.close()
     assert rv.status_code == 200
 
 
@@ -413,6 +416,7 @@ def test_root_mount(app, babel):
     client = app.test_client()
     rv = client.get("/mockview/")
     assert rv.data == b"Success!"
+    rv.close()
 
     # test static files when url='/'
     with app.test_request_context("/"):
