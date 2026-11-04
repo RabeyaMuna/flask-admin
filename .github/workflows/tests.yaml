@@ -4,7 +4,7 @@ jobs:
   tests:
     name: ${{ matrix.tox == 'normal' && format('py{0}', matrix.python) || 
       matrix.tox }}
-    runs-on: ${{ matrix.os || 'ubuntu-latest' }}
+    runs-on: ${{ matrix.os || 'ubuntu-24.04' }}
     strategy:
       fail-fast: false
       matrix:
